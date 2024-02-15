@@ -10,7 +10,10 @@ Usage example :
   external_components:
     - source:
         type: git
-        url: https://github.com/fxmike08/knx
+        ref: dev
+        url: https://github.com/fxmike08/custom-esphome
+      components: [ knx ]
+      refresh: 0s
 
 ...
   uart:
