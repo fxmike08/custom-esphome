@@ -10,7 +10,7 @@ Usage example :
   external_components:
     - source:
         type: git
-        ref: dev
+        ref: main
         url: https://github.com/fxmike08/custom-esphome
       components: [ knx ]
       refresh: 0s
