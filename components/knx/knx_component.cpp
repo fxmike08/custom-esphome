@@ -494,7 +494,7 @@ namespace knx {
     while (! ( this->available() > 0)) {
       delay(1);
       if(millis() - startTime > this->serial_timeout_){
-        ESP_LOGW(TAG, "Serial timeout reached [%d]! Unable to read from serial ! Aborting.", this->serial_timeout_);
+        ESP_LOGW(TAG, "Serial timeout reached (%d ms) ! Unable to read from serial ! Aborting.", this->serial_timeout_);
         isSerialAvailable = false;
         break;
       }
