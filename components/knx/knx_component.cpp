@@ -43,7 +43,9 @@ namespace knx {
 
   void KnxComponent::set_use_address(const std::string &use_address) { this->use_address_ = use_address; }
 
-
+  void KnxComponent::set_serial_timeout(const uint32_t &serial_timeout) {
+    this->serial_timeout_ = serial_timeout;
+  }
   /* ============== ADAPTED ======================= */
 
   void KnxComponent::set_listen_to_broadcasts(bool listen) {
@@ -465,6 +467,7 @@ namespace knx {
       }
       else if (confirmation == -1) {
         // Read timeout
+        ESP_LOGD(TAG, "Serial read timeout !");
         delay (SERIAL_WRITE_DELAY_MS);
         return false;
       }
@@ -487,13 +490,21 @@ namespace knx {
 
   int KnxComponent::serial_read() {
     unsigned long startTime = millis();
+    bool isSerialAvailable = true;
     while (! ( this->available() > 0)) {
       delay(1);
+      if(millis() - startTime > this->serial_timeout_){
+        ESP_LOGW(TAG, "Serial timeout reached [%d]! Unable to read from serial ! Aborting.", this->serial_timeout_);
+        isSerialAvailable = false;
+        break;
+      }
     }
-
-    int inByte = this->read();
-    this->check_errors();
-    this->print_byte(inByte);
+    int inByte = -1;
+    if (isSerialAvailable){
+      inByte = this->read();
+      this->check_errors();
+      this->print_byte(inByte);
+    } 
 
     return inByte;
   }

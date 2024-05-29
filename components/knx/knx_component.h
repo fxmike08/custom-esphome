@@ -42,6 +42,7 @@ class KnxComponent : public Component, public uart::UARTDevice {
     void setup() override;
     void dump_config() override;
     void set_use_address(const std::string &use_address);
+    void set_serial_timeout(const uint32_t &serial_timeout);
 
     // KNXTpUART - adapted
     void uart_reset();
@@ -94,6 +95,7 @@ class KnxComponent : public Component, public uart::UARTDevice {
 
   protected:
     std::string use_address_;
+    uint32_t serial_timeout_;
     // KNXTpUART - adapted
     KnxTelegram* _tg;       // for normal communication
     KnxTelegram* _tg_ptp;   // for PTP sequence confirmation

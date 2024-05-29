@@ -11,6 +11,7 @@ knx_ns = cg.esphome_ns.namespace("knx")
 knx_component = knx_ns.class_("KnxComponent", cg.Component, uart.UARTDevice)
 
 CONF_LISTENING_ADDRESSES = "listen_group_address"
+CONF_SERIAL_TIMEOUT = "serial_timeout"
 
 CONFIG_SCHEMA = (
     cv.Schema(
@@ -21,6 +22,7 @@ CONFIG_SCHEMA = (
             cv.Optional(CONF_LISTENING_ADDRESSES, default=[]): cv.ensure_list(
                 cv.string_strict
             ),
+            cv.Optional(CONF_SERIAL_TIMEOUT, default=1000): cv.uint32_t,
         }
     )
     .extend(cv.COMPONENT_SCHEMA)
@@ -39,6 +41,7 @@ async def to_code(config):
         cg.add(var.set_lambda_writer(lambda_))
 
     cg.add(var.set_use_address(config[CONF_USE_ADDRESS]))
+    cg.add(var.set_serial_timeout(config[CONF_SERIAL_TIMEOUT]))
 
     for addreses in config[CONF_LISTENING_ADDRESSES]:
         cg.add(var.add_listen_group_address(addreses))

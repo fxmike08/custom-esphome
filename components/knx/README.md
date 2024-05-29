@@ -1,7 +1,16 @@
 # knx - Component for esphome
 ## Esphome Component that allow comunication using Knx - Twisted Pair
-This component is written for esphome in order to comunicate via KNX TP.
-This is based on [KnxTpUart](https://github.com/majuss/KnxTpUart) library and modified for compiling on ESP32/ESP8266 according with esphome coding style.
+This component is written for ESPHome to enable communication via KNX TP(Twisted Pair).
+This is based on [KnxTpUart](https://github.com/majuss/KnxTpUart) and has been modified to compile on ESP32/ESP8266, following ESPHome coding style.
+### Knx component configuration:
+
+
+*  **id (Required** , ID): Specifies the ID used for the KNX component.
+*  **uart_id (Required**, ID): Specifies the ID of the UART hub.
+*  **use_address (Required**, string): Defines the KNX device address. The format is group.subgroup.address (e.g., 10.22.10).
+*  **listen_group_address (Required**, Array[string]): An array of addresses that the component will listen to.
+*  **serial_timeout** (Optional, int): Sets the serial read timeout in milliseconds. The default is 1000 ms.
+*  **lambda (Required**):  Required for receiving KNX events. The KNX event will have one of the addresses specified in the `listen_group_address` entries.
 
 
 Usage example :
@@ -31,7 +40,6 @@ Usage example :
           - lambda: UARTDebug::log_binary(direction, bytes, 32);
 
 ...
-
   knx:
     id: knxd
     uart_id: uart_bus
@@ -50,7 +58,6 @@ Usage example :
       return;
 
 ...
-
   api:
     services:
       - service: knx_write_group_bool
