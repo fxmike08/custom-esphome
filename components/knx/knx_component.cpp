@@ -53,12 +53,12 @@ namespace knx {
   }
 
   void KnxComponent::uart_reset() {
-    byte sendByte = 0x01;
+    uint8_t sendByte = 0x01;
     this->write(sendByte);
   }
 
   void KnxComponent::uart_state_request() {
-    byte sendByte = 0x02;
+    uint8_t sendByte = 0x02;
     this->write(sendByte);
   }
 
@@ -189,7 +189,7 @@ namespace knx {
     return this->send_message();
   }
 
-  bool KnxComponent::group_write_4Bit_dim(String address, bool direction, byte steps) {
+  bool KnxComponent::group_write_4Bit_dim(String address, bool direction, uint8_t steps) {
     int value = 0;
     if (direction || steps) {
       value = (direction << 3) + (steps & B00000111);
@@ -477,13 +477,13 @@ namespace knx {
   }
 
   void KnxComponent::send_ack() {
-    byte sendByte = B00010001;
+    uint8_t sendByte = B00010001;
     this->write(sendByte);
     delay(SERIAL_WRITE_DELAY_MS);
   }
 
   void KnxComponent::send_not_addressed() {
-    byte sendByte = B00010000;
+    uint8_t sendByte = B00010000;
     this->write(sendByte);
     delay(SERIAL_WRITE_DELAY_MS);
   }

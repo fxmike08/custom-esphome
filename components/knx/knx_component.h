@@ -16,10 +16,10 @@ namespace knx {
 
 static const int MAX_LISTEN_GROUP_ADDRESSES=15;
 static const int SERIAL_WRITE_DELAY_MS=100;
-static const byte TPUART_DATA_START_CONTINUE=B10000000;
-static const byte TPUART_DATA_END=B01000000;
+inline constexpr uint8_t TPUART_DATA_START_CONTINUE=B10000000;
+inline constexpr uint8_t TPUART_DATA_END=B01000000;
 // Services from TPUART
-static const byte  TPUART_RESET_INDICATION_BYTE=B11;
+inline constexpr uint8_t TPUART_RESET_INDICATION_BYTE=B11;
 
 enum KnxComponentserial_eventType {
   TPUART_RESET_INDICATION,
@@ -57,7 +57,7 @@ class KnxComponent : public Component, public uart::UARTDevice {
 
     bool group_write_bool(String, bool);
     bool group_write_4bit_int(String, int);
-    bool group_write_4Bit_dim(String, bool, byte);
+    bool group_write_4Bit_dim(String, bool, uint8_t);
     bool group_write_1byte_int(String, int);
     bool group_write_2byte_int(String, int);
     bool group_write_2byte_float(String, float);
@@ -69,7 +69,7 @@ class KnxComponent : public Component, public uart::UARTDevice {
     bool group_answer_bool(String, bool);
     /*
       bool group_answer_4bit_int(String, int);
-      bool group_answer_4bit_dim(String, bool, byte);
+      bool group_answer_4bit_dim(String, bool, uint8_t);
     */
     bool group_answer_1byte_int(String, int);
     bool group_answer_2byte_int(String, int);
