@@ -14,12 +14,12 @@ static const char *const TAG = "knx";
 namespace esphome {
 namespace knx {
 
-static const int MAX_LISTEN_GROUP_ADDRESSES=15;
-static const int SERIAL_WRITE_DELAY_MS=100;
-inline constexpr uint8_t TPUART_DATA_START_CONTINUE=B10000000;
-inline constexpr uint8_t TPUART_DATA_END=B01000000;
+static const int MAX_LISTEN_GROUP_ADDRESSES = 15;
+static const int SERIAL_WRITE_DELAY_MS = 100;
+inline constexpr uint8_t TPUART_DATA_START_CONTINUE = 0b10000000;
+inline constexpr uint8_t TPUART_DATA_END = 0b01000000;
 // Services from TPUART
-inline constexpr uint8_t TPUART_RESET_INDICATION_BYTE=B11;
+inline constexpr uint8_t TPUART_RESET_INDICATION_BYTE = 0b11;
 
 enum KnxComponentserial_eventType {
   TPUART_RESET_INDICATION,
